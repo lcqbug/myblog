@@ -1,27 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:111111@localhost/pythonclass'
+from myblog_model import *
+import mysettings
+# app = Flask(__name__)  在初始化化模块的文件中 初始化了app,两者要保持一致
+# 请按照 'mysql://登录名:密码@localhost/pythonclass' 来配置自己的数据库
+app.config['SQLALCHEMY_DATABASE_URI'] = mysettings.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-
-
-# 文章标题title,100, 作者author 20,内容content  最多5000字
-class Blog(db.Model):
-    __tablename__ = 'blog'
-    id = db.Column(db.INT, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(100))
-    author = db.Column(db.String(30))
-    content = db.Column(db.Text)
-
-    def __init__(self, title, author, content):
-        self.title = title
-        self.author = author
-        self.content = content
-
-
-# db.create_all()
 
 # html
 # 视图函数  --  接口
