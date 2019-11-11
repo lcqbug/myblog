@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/newblog">新建博客</a>
+{#<br>#}
+{#<a href={{ url_for('new_blog') }}>新建博客</a>#}
+{% for blog in blogs %}
+    <h1><a href={{ url_for('show_blog',blog_id=blog.id) }}>{{ blog.title }}</a></h1>
+{% endfor %}
+
+
+
+</body>
+</html>
